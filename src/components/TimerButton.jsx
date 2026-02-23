@@ -1,11 +1,9 @@
-// IMPORT STATEMENTS
+import "./TimerButton.css";
 
-// FUNCTION DEFINITION
-export default function TimerButton() {
-  // ANY VARIABLES, HOOKS, ETC.
-
+export default function TimerButton(props) {
   return (
-    //RENDER HTML (SINGLE PARENT ONLY)
-    <></>
+    <button className="duration-btn" onClick={props.onClick}>
+      {props.value} mins
+    </button>
   );
 }
