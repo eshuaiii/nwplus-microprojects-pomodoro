@@ -2,6 +2,8 @@ import "./Garden.css";
 
 const GRID_SIZE = 18;
 
+// TODO
+
 function Garden({ setPage, rewards }) {
   const grid = Array.from({ length: GRID_SIZE }, (_, i) => rewards[i] ?? null);
 
@@ -17,6 +19,7 @@ function Garden({ setPage, rewards }) {
               Go Back to Timer
             </button>
           </div>
+          {/* TODO */}l
         </div>
       </div>
     </div>

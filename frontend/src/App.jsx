@@ -6,6 +6,10 @@ import { useState } from "react";
 function App() {
   const [page, setPage] = useState("timer");
   const [rewards, setRewards] = useState([]);
+
+  // ========================================================================================================
+  // TODO
+
   return (
     <>
       {page === "timer" ? (
