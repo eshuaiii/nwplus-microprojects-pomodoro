@@ -77,7 +77,10 @@ export default function Timer({ setPage, setRewards }) {
           <div className="timer-main">
             <div className="duration-group">
               <h3>Start studying</h3>
-              <TimerButton value={30} onClick={() => handleSetDuration(1)} />
+              <TimerButton
+                value={30}
+                onClick={() => handleSetDuration(30 * 60)}
+              />
               <TimerButton
                 value={45}
                 onClick={() => handleSetDuration(45 * 60)}
