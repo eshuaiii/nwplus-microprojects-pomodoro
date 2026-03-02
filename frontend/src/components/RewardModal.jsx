@@ -14,6 +14,7 @@ function RewardModal({ durationMinutes, onClose, setRewards }) {
   const hasChosen = chosenIndex !== null;
 
   function handleAccept() {
+    // TODO
     onClose();
   }
 
