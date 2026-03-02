@@ -47,7 +47,8 @@ app.post("/api/focus-sessions", (req, res) => {
 // ========================================================================================================
 // ENDPOINT: View your gallery of rewards
 app.get("/api/rewards", (req, res) => {
-  // TODO: stub
+  const db = readDb();
+  res.json({ rewards: db.rewards });
 });
 
 // ========================================================================================================
