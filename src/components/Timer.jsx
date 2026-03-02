@@ -4,7 +4,7 @@ import { FaPlay } from "react-icons/fa";
 import { IoIosPause } from "react-icons/io";
 import { VscDebugRestart } from "react-icons/vsc";
 import TimerButton from "./TimerButton";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Timer() {
   // State variables
@@ -15,6 +15,14 @@ export default function Timer() {
   // isRunning is a boolean that indicates if the timer is running
   const [isRunning, setIsRunning] = useState(false);
 
+  useEffect(() => {
+    // if timer is paused or no time left, do nothin
+    
+    //set up interval
+    
+    // cleanup interval
+  }, []);
+
   // Helper function to format time
   function formatTime(totalSeconds) {
     const minutes = Math.floor(totalSeconds / 60);
@@ -22,11 +30,20 @@ export default function Timer() {
     return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
   }
 
-  function handleSetDuration(seconds) {}
+  function handleSetDuration(seconds) {
+    setDuration(seconds);
+    setTimeLeft(seconds);
+    setIsRunning(true);
+  }
 
-  function toggleRunning() {}
+  function toggleRunning() {
+    setIsRunning((prev) => !prev);
+  }
 
-  function handleReset() {}
+  function handleReset() {
+    setTimeLeft(duration);
+    setIsRunning(false);
+  }
 
   return (
     <div className="timer-page">
@@ -36,28 +53,46 @@ export default function Timer() {
             {/* These are icons imported from react-icons library */}
             {/* if the isRunning state is true, show the pause icon, otherwise show the play icon */}
             {isRunning ? (
-              <IoIosPause className="icon-btn" />
+              <IoIosPause className="icon-btn" onClick={toggleRunning} />
             ) : (
-              <FaPlay className="icon-play" />
+              <FaPlay className="icon-play" onClick={toggleRunning} />
             )}
-            <VscDebugRestart className="icon-btn" />
+            <VscDebugRestart className="icon-btn" onClick={handleReset} />
           </div>
           {/* Study button group */}
           <div className="timer-main">
             <div className="duration-group">
               <h3>Start studying</h3>
-              <TimerButton value={30} />
-              <TimerButton value={45} />
-              <TimerButton value={60} />
+              <TimerButton
+                value={30}
+                onClick={() => handleSetDuration(30 * 60)}
+              />
+              <TimerButton
+                value={45}
+                onClick={() => handleSetDuration(45 * 60)}
+              />
+              <TimerButton
+                value={60}
+                onClick={() => handleSetDuration(60 * 60)}
+              />
             </div>
 
             <div className="timer-display">{formatTime(timeLeft)}</div>
 
             <div className="duration-group">
               <h3>Start break</h3>
-              <TimerButton value={5} />
-              <TimerButton value={10} />
-              <TimerButton value={15} />
+              <TimerButton
+                value={5}
+                onClick={() => handleSetDuration(5 * 60)}
+              />
+              <TimerButton
+                value={10}
+                onClick={() => handleSetDuration(10 * 60)}
+              />
+              <TimerButton
+                value={15}
+                onClick={() => handleSetDuration(15 * 60)}
+              />
             </div>
           </div>
           <button className="garden-btn">See your garden</button>
