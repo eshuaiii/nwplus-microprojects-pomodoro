@@ -2,7 +2,6 @@ import "./Garden.css";
 
 const GRID_SIZE = 18;
 
-// TODO
 const REWARD_IMAGES = {
   mango: '/mango.png',
   orange: '/orange.png',
@@ -26,7 +25,6 @@ function Garden({ setPage, rewards }) {
               Go Back to Timer
             </button>
           </div>
-          {/* TODO */}
           <div className="garden-grid">
             {grid.map((reward, index) => (
               <div className="garden-cell" key={index}>
