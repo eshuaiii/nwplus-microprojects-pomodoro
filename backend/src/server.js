@@ -21,13 +21,27 @@ app.get("/", (req, res) => {
 // ========================================================================================================
 // Reward mapping helper
 function rewardForFocusMinutes(minutes) {
-  // TODO: stub
+  const map = {
+    30: "mango",
+    45: "orange",
+    60: "strawberry",
+  };
+  return map[minutes];
 }
 
 // ========================================================================================================
 // ENDPOINT: Complete a focus session → earn reward
 app.post("/api/focus-sessions", (req, res) => {
-  // TODO: stub
+  const reward = rewardForFocusMinutes(req.body.focusMinutes);
+
+  const db = readDb();
+  db.rewards.push({
+    reward, // "mango" | "orange" | "strawberry"
+    earnedAt: Date.now(), // timestamp for ordering
+  });
+  writeDb(db);
+
+  res.json({ reward });
 });
 
 // ========================================================================================================
