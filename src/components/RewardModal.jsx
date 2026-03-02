@@ -8,10 +8,14 @@ function getRewardFruit(durationMinutes) {
   return "🌻";
 }
 
-function RewardModal({ durationMinutes, onClose }) {
+function RewardModal({ durationMinutes, onClose, setRewards }) {
   const [chosenIndex, setChosenIndex] = useState(null);
   const fruit = getRewardFruit(durationMinutes);
   const hasChosen = chosenIndex !== null;
+
+  function handleAccept() {
+    onClose();
+  }
 
   return (
     <div className="reward-overlay">
@@ -46,7 +50,7 @@ function RewardModal({ durationMinutes, onClose }) {
           <button
             className="reward-accept-btn"
             disabled={!hasChosen}
-            onClick={onClose}
+            onClick={handleAccept}
           >
             Accept
           </button>

@@ -7,7 +7,7 @@ import TimerButton from "./TimerButton";
 import { useState, useEffect } from "react";
 import RewardModal from "./RewardModal";
 
-export default function Timer({ setPage }) {
+export default function Timer({ setPage, setRewards }) {
   // State variables
   // duration is the total duration of the timer in seconds
   const [duration, setDuration] = useState(30 * 60);
@@ -115,6 +115,7 @@ export default function Timer({ setPage }) {
         <RewardModal
           durationMinutes={duration / 60}
           onClose={() => setShowReward(false)}
+          setRewards={setRewards}
         />
       )}
     </div>
