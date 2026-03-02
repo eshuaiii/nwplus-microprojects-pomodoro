@@ -13,7 +13,22 @@ function RewardModal({ durationMinutes, onClose, setRewards }) {
   const fruit = getRewardFruit(durationMinutes);
   const hasChosen = chosenIndex !== null;
 
-  function handleAccept() {
+  async function handleAccept() {
+    try {
+      const res = await fetch("http://localhost:8000/api/focus-sessions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ focusMinutes: durationMinutes }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.reward) setRewards((prev) => [...prev, data.reward]);
+      } else {
+        console.error("Failed to save reward:", await res.text());
+      }
+    } catch (err) {
+      console.error("Network error saving reward:", err);
+    }
     onClose();
   }
 
