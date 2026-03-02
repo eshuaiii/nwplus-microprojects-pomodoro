@@ -33,6 +33,11 @@ function rewardForFocusMinutes(minutes) {
 // ENDPOINT: Complete a focus session → earn reward
 app.post("/api/focus-sessions", (req, res) => {
   const reward = rewardForFocusMinutes(req.body.focusMinutes);
+  if (!reward) {
+    return res.status(400).json({
+      error: "Invalid focusMinutes. Use 30, 45, or 60.",
+    });
+  }
 
   const db = readDb();
   db.rewards.push({
