@@ -7,7 +7,7 @@ import TimerButton from "./TimerButton";
 import { useState, useEffect } from "react";
 import RewardModal from "./RewardModal";
 
-export default function Timer() {
+export default function Timer({ setPage }) {
   // State variables
   // duration is the total duration of the timer in seconds
   const [duration, setDuration] = useState(30 * 60);
@@ -106,7 +106,9 @@ export default function Timer() {
               />
             </div>
           </div>
-          <button className="garden-btn">See your garden</button>
+          <button className="garden-btn" onClick={() => setPage("garden")}>
+            See your garden
+          </button>
         </div>
       </div>
       {showReward && (
