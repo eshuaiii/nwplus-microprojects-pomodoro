@@ -5,6 +5,7 @@ import { IoIosPause } from "react-icons/io";
 import { VscDebugRestart } from "react-icons/vsc";
 import TimerButton from "./TimerButton";
 import { useState, useEffect } from "react";
+import RewardModal from "./RewardModal";
 
 export default function Timer() {
   // State variables
@@ -14,14 +15,27 @@ export default function Timer() {
   const [timeLeft, setTimeLeft] = useState(30 * 60);
   // isRunning is a boolean that indicates if the timer is running
   const [isRunning, setIsRunning] = useState(false);
+  // showReward is a boolean that indicates if the reward modal should be shown
+  const [showReward, setShowReward] = useState(false);
 
   useEffect(() => {
-    // if timer is paused or no time left, do nothin
-    
+    // if timer is paused or no time left, do nothing
+    if (!isRunning || timeLeft <= 0) return;
     //set up interval
-    
+    const interval = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          setIsRunning(false);
+          setShowReward(true);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
     // cleanup interval
-  }, []);
+    return () => clearInterval(interval);
+  }, [isRunning]);
 
   // Helper function to format time
   function formatTime(totalSeconds) {
@@ -63,10 +77,7 @@ export default function Timer() {
           <div className="timer-main">
             <div className="duration-group">
               <h3>Start studying</h3>
-              <TimerButton
-                value={30}
-                onClick={() => handleSetDuration(30 * 60)}
-              />
+              <TimerButton value={30} onClick={() => handleSetDuration(1)} />
               <TimerButton
                 value={45}
                 onClick={() => handleSetDuration(45 * 60)}
@@ -98,6 +109,12 @@ export default function Timer() {
           <button className="garden-btn">See your garden</button>
         </div>
       </div>
+      {showReward && (
+        <RewardModal
+          durationMinutes={duration / 60}
+          onClose={() => setShowReward(false)}
+        />
+      )}
     </div>
   );
 }
