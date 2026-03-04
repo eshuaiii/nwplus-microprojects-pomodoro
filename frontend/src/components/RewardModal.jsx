@@ -2,9 +2,9 @@ import { useState } from "react";
 import "./RewardModal.css";
 
 function getRewardFruit(durationMinutes) {
-  if (durationMinutes === 1) return "🌸";
-  if (durationMinutes === 30) return "🥭";
-  if (durationMinutes === 45) return "🍓";
+  if (durationMinutes === 30) return "🍊";
+  if (durationMinutes === 45) return "🥭";
+  if (durationMinutes === 60) return "🍓";
   return "🌻";
 }
 
