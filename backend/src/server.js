@@ -7,7 +7,7 @@ const cors = require("cors");
 const { readDb, writeDb } = require("./db");
 
 const app = express();
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 // CORS middleware to allow frontend to access backend
 app.use(cors());
